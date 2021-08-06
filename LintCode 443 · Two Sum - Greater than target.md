@@ -1,6 +1,6 @@
 # LintCode 443 · Two Sum - Greater than target
 
-**LintCode 443 · Two Sum - Greater than target**
+**# LintCode 443 · Two Sum - Greater than target**
 
 public class Solution {
     /**
@@ -18,7 +18,7 @@ public class Solution {
         Arrays.sort(nums);
         int count = 0;
 
-        while (left < right) {
+**        while (left < right) {**
             if(nums[left] + nums[right] > target) {
                 count += right - left;
                 right--;
@@ -29,3 +29,5 @@ public class Solution {
         return count;
     }
 }
+![LintCode 443 · Two Sum - Greater than target](images/LintCode%20443%20·%20Two%20Sum%20-%20Greater%20than%20target.png)
+

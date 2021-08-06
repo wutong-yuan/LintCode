@@ -51,6 +51,29 @@ public class Solution {
     }
 }
 
+**_Use map_**
+public int twoSum6(int[] nums, int target) {
+        // write your code here
+        if (nums == null || nums.length < 2) return 0;
+        Map<Integer, Integer>  map = new HashMap<>();
+        Arrays.sort(nums);
+        int left = 0; 
+        int right = nums.length - 1;
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (sum == target) {
+                map.put(nums[left], nums[right]);
+                left++;
+                right--;
+            } else if (sum > target) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return map.size();   
+    }
+
 **_Doesn’t use extra space _**
 
 public int twoSum6(int[] nums, int target) {

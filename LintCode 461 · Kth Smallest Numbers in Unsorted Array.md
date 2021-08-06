@@ -2,6 +2,78 @@
 
 # LintCode **# 461 · Kth Smallest Numbers in Unsorted Array**
 
+**_
+_**
+**_Approach 1: use quick select_**
+
+public class Solution {
+    /**
+     * @param k: An integer
+     * @param nums: An integer array
+     * @return: kth smallest element
+     */
+    public int kthSmallest(int k, int[] nums) {
+        // write your code here
+        if (nums == null || nums.length < k) return 0;
+        quickSort(nums, k, 0, nums.length - 1);
+        return nums[k - 1];
+    }
+    private void quickSort(int[] nums, int k, int start, int end) {
+        if (start == k - 1) return;
+        if (start >= end) return;
+
+        int left = start;
+        int right = end;
+        int pivotVal = (nums[start] + nums[end]) / 2;
+        while (left <= right) {
+            while (left <= right && nums[left] < pivotVal) {
+                left++;
+            }
+
+            while (left <= right && nums[right] > pivotVal) {
+                right--;
+            }
+
+            if (left <= right) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                left++;
+                right--;
+            }
+        }
+        quickSort(nums, k, start, right);
+        quickSort(nums, k, left, end);
+    }
+}
+
+**_Approach 2 - use maxHeap:_**
+public class Solution {
+    /**
+     * @param k: An integer
+     * @param nums: An integer array
+     * @return: kth smallest element
+     */
+    public int kthSmallest(int k, int[] nums) {
+        // write your code here
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, new Comparator<Integer>(){
+            public int compare(Integer a, Integer b) {
+                return b - a;
+            }           
+        });
+
+        for (int i = 0; i < nums.length; i++) {
+            maxHeap.offer(nums[i]);
+            if (maxHeap.size() > k) {
+                maxHeap.poll();
+            }
+        }
+
+        return maxHeap.poll();
+
+    }
+}
+
 public class Solution {
     /**
      * @param k: An integer
